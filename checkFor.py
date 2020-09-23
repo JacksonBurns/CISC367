@@ -1,8 +1,11 @@
 import re
 
-def checkFor(data,regex):
+def checkFor(data,regex,ignorecase=False):
     out =[]
-    pattern = re.compile(regex)
+    if(ignorecase):
+        pattern = re.compile(regex, re.IGNORECASE)    
+    else:
+        pattern = re.compile(regex)
     for line in data:
         m = pattern.search(line)
         if m:
