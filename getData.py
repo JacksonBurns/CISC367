@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 
 
-def ParseXML(filename):
+def getData(filename):
     """
     One line passthrough to xml element tree, returns root of tree
 
