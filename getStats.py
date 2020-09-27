@@ -17,12 +17,12 @@ def gS(filename,verbose,num_conv):
         authors = {}
         num_messages=0
         for msg in data[4:]:
-            # increment number of messages
-            num_messages+=1
             # if not the number we want, skip to next message
             if(int(msg.items()[0][1])!=i): continue
             # if we have passed the message, break for efficiency
             if(int(msg.items()[0][1])>i): break
+            # increment number of messages
+            num_messages+=1
             # author of the message is given in the first index
             auth = msg[1].text
             if(auth not in authors):
