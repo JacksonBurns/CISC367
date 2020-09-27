@@ -1,35 +1,48 @@
 from checkFor import checkFor
 from getData import getData
 
-def main(num_conv=10, filename='merged-pythondev-help.xml'):
-    # read data in from xml
-    data = getData(filename)
-    # group data by conversation id
-    conversations = {}
-    for message in data[4:]:  # ignore starting info
-        conv_id = int(message.items()[0][1])  # conversation number
-        if(conv_id not in conversations):
-            conversations[conv_id] = [message[2].text]
-        else:
-            conversations[conv_id] = conversations[conv_id] + [message[2].text]
-    for i in range(1,num_conv+1):
-        print("Conversation Number {}:".format(i))
-        messages = conversations[i]
-        # check for questions
-        result = checkFor(messages,r'.*\?.*')
-        num_questions = sum(result)
-        print("{} question(s)".format(num_questions))
-        # check for text speak
-        result = [0]*num_conv
-        for reg in text_speak:
-            temp = checkFor(messages,reg,ignorecase=True)
-            result = [sum(x) for x in zip(result, temp)]
-        num_text_speak = sum(result)
-        print("{} text abbreviation(s)".format(num_text_speak))
+def main(num_conv=None, filename='merged-pythondev-help.xml', verbose=False):
+    def retrieve_data():
+        # create output files
+        outQs = open(r'questions_found.csv','w')
+        outQs.write("conv_id,#_questions\n")
+        outTxtSpk = open(r'txtspk_found.csv','w')
+        outTxtSpk.write("conv_id,#_txt_abbreviations\n")
+        # read data in from xml
+        data = getData(filename)
+        # group data by conversation id
+        conversations = {}
+        for message in data[4:]:  # ignore starting info
+            conv_id = int(message.items()[0][1])  # conversation number
+            if(conv_id not in conversations):
+                conversations[conv_id] = [message[2].text]
+            else:
+                conversations[conv_id] = conversations[conv_id] + [message[2].text]
+        if num_conv is None:
+            num_conv = len(conversations.keys())
+        for i in range(1,num_conv+1):
+            if(verbose):print("Conversation Number {}:".format(i))
+            messages = conversations[i]
+            # check for questions
+            result = checkFor(messages,r'.*\?.*')
+            num_questions = sum(result)
+            outQs.write(str(i)+","+str(num_questions)+"\n")
+            if(verbose):print("{} question(s)".format(num_questions))
+            # check for text speak
+            result = [0]*num_conv
+            for reg in text_speak:
+                temp = checkFor(messages,reg,ignorecase=True)
+                result = [sum(x) for x in zip(result, temp)]
+            num_text_speak = sum(result)
+            outTxtSpk.write(str(i)+","+str(num_text_speak)+"\n")
+            if(verbose):print("{} text abbreviation(s)".format(num_text_speak))
+            if(verbose):print("End Conversation {}.".format(i))
+            if(verbose):print("")
+    retrieve_data()
 
-        print("End Conversation {}.".format(i))
+    def compare_to_gold():
         print("")
-
+    
 
 if __name__ == "__main__":
     # this list picks up too many parts of other words
@@ -42,7 +55,7 @@ if __name__ == "__main__":
     #     r'.*WTH.*',r'.*WTF.*',r'.*YMMD.*',r'.*YMMV.*',r'.*YAM.*',r'.*ICYMI.*',r'.*Np.*']
     
     # this list seems to match the gold set better
-    text_speak = [r'.*Np.*',r'.*LOL.*'r'.*LOL.*'r'.*THX.*']
+    text_speak = [r'.*Np.*',r'.*op.*'r'.*tbd.*',r'.*THX.*',r'.*lol.*']
     
     # call main
-    main(num_conv=50)
+    main(num_conv=10)
