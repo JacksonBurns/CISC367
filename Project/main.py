@@ -15,11 +15,11 @@ def main():
     totalMessages = 0
     questions = []
     for message in allData:
-        if(checkFor.isQuestion(message[2].text)):
-            questions.append(message[0])
+        if(checkFor.isQuestion(message[2].text,checkUnpuncuated=True)):
+            questions.append(totalMessages)
         totalMessages += 1
     # dispaly the results
-    print("""~~~ RESULTS ~~~\n# Messages: {}\n# w/ Questions: {}\nExecution Time: {:.2f} (s)"""
+    print("""~~~ RESULTS ~~~\n# Messages: {}\n# w/ Unpuncuated Questions: {}\nExecution Time: {:.2f} (s)"""
         .format(totalMessages,len(questions),time.time()-start))
 
     

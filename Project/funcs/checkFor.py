@@ -1,6 +1,6 @@
 import re, nltk
 
-def isQuestion(message):
+def isQuestion(message,checkUnpuncuated=False):
     """
     Given a string, this function will return True if it contains a questions and false otherwise
     There are two likely cases where a string would contain a question:
@@ -28,10 +28,10 @@ def isQuestion(message):
     parts = [i[1] for i in pos]
     if('NN' in parts and 'PRP' in parts):
         interG2 = True
-    return True if sum([hasQM, interG1, interG2]) > 1 else False
-
-
-    
+    if(checkUnpuncuated):
+        return True if sum([hasQM, interG1, interG2]) > 1 else False
+    else:
+        return (not hasQM) and  interG1 and interG2
 
 def regexSearch(data,regex,ignorecase=False):
     """
