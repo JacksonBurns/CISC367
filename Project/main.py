@@ -19,8 +19,10 @@ def main():
             questions.append(message[0])
         totalMessages += 1
     # dispaly the results
-    print("""~~~ RESULTS ~~~\n# Messages: {}\n# w/ Questions: {}\nExecution Time: {} (s)"""
-        .format(totalMessages,len(questions),round(time.time()-start,2)))
+    print("""~~~ RESULTS ~~~\n# Messages: {}\n# w/ Questions: {}\nExecution Time: {:.2f} (s)"""
+        .format(totalMessages,len(questions),time.time()-start))
+
+    
     print("Starting comparison to Gold Set")
     
 
