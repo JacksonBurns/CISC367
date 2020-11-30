@@ -6,17 +6,26 @@ import time, csv, json
 def main(pullFromJSON=True):
     if(pullFromJSON):
         print("Loading results from JSON")
-        results = json.load(open('automated_results.dict'))
+        try:
+            results = json.load(open('automated_results.dict'))
+            print("Successfully loaded results from JSON")
+        except Exception:
+            print("Could not read previous results")
+            return
     else:
         print("Starting automated message retrieval")
         print("")
         results = getQuestions()
 
-    print("Starting comparison to Gold Set")
-    testMain.compareGoldAndCalculated('data/2017 Gold Set - Sheet1.csv', results[0])
-    testMain.compareGoldAndCalculated('data/2018 Gold Set - Sheet1.csv', results[1])
-    testMain.compareGoldAndCalculated('data/2019 Gold Set - Sheet1.csv', results[2])
-    testMain.compareGoldAndCalculated('data/Kaggle Gold Set - Sheet1.csv', results[3])
+    print("\nStarting comparison to Gold Set")
+    testMain.compareGoldAndCalculated('data/2017 Gold Set - Sheet1.csv', results["2017_Slack_Data.xml"])
+    print("")
+    testMain.compareGoldAndCalculated('data/2018 Gold Set - Sheet1.csv', results["2018_Slack_Data.xml"])
+    print("")
+    testMain.compareGoldAndCalculated('data/2019 Gold Set - Sheet1.csv', results["2019_Slack_Data.xml"])
+    print("")
+    testMain.compareGoldAndCalculated('data/Kaggle Gold Set - Sheet1.csv', results["KaggleData.csv"])
+
 def getQuestions():
     results = {}
     print("Analyzing Slack data sets")
