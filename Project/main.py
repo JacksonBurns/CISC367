@@ -13,7 +13,10 @@ def main(pullFromJSON=True):
         results = getQuestions()
 
     print("Starting comparison to Gold Set")
-
+    testMain.compareGoldAndCalculated('data/2017 Gold Set - Sheet1.csv', results[0])
+    testMain.compareGoldAndCalculated('data/2018 Gold Set - Sheet1.csv', results[1])
+    testMain.compareGoldAndCalculated('data/2019 Gold Set - Sheet1.csv', results[2])
+    testMain.compareGoldAndCalculated('data/Kaggle Gold Set - Sheet1.csv', results[3])
 def getQuestions():
     results = {}
     print("Analyzing Slack data sets")
