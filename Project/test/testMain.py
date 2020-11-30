@@ -32,6 +32,5 @@ def compareGoldAndCalculated(goldSetFile, calculatedChatids:dict):
     print(score)
     print("F score: ")
     print(fscore)
-    return score 
-
-print(compareGoldAndCalculated("/Users/kristinaholsapple/Documents/CISC/367 Intro to CS Research/final/CISC367/Project/data/2017 Gold Set - Sheet1.csv", [950, 953, 976, 995, 996]))
+    score_list = [score, fscore]
+    return score_list
