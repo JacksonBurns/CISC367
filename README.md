@@ -8,7 +8,7 @@ Code used for homework 5 is pulled from a pair of open-source repositories. The 
 Contained under the **Project** directory is the work completed for the semseter research project. Contributions are as indicated by the commit history.
 
 ### Repository UML Layout 
-![UML Diagram](/Users/michaelcarr/Desktop/367UMLDiagram.png)
+![UML Diagram](367UMLDiagram.png)
 General visualisation of the project's workflow. 
 
 ### data
