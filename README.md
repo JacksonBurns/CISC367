@@ -15,7 +15,7 @@ General visualisation of the project's workflow.
 The ***Data*** directory contains the raw data sets used for this project as XML files as well as all gold sets used for comparison as CVS files. Data for this project was collected from public Slack channels. 
 
 ### funcs
-The ***funcs** directory holds the main scripts of the project. This includes scripts to parse XML files, remove unwanted characters, and finally determine if a sentence is an unpuncuated question.
+The ***funcs*** directory holds the main scripts of the project. This includes scripts to parse XML files, remove unwanted characters, and finally determine if a sentence is an unpuncuated question.
 
 ### test
 The ***test*** directory is used to calculated both the F-score and Cohen's Kappa of the results of the main scripts when compared against the gold sets. 
